@@ -1,0 +1,9 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - pyopenssl=20.0.1
+  - python=3.9.1
+  - requests=2.25.1
+  - jupyterlab=3.2.1
+  - ipympl=0.8.2

@@ -1,0 +1,5 @@
+FROM mambaorg/micromamba:0.15.2
+COPY --chown=micromamba:micromamba jupyter.yml /tmp/env.yaml
+RUN micromamba install -y -n base -f /tmp/env.yaml && \
+    micromamba clean --all --yes
+CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root","--NotebookApp.token='forrest'"]
