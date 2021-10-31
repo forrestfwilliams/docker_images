@@ -1,0 +1,11 @@
+name: hyp3
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - geopandas=0.10.2
+  - rasterio=1.2.10
+  - hyp3_sdk=1.4.0
+  - hyp3lib=1.6.8
+  - jupyterlab=3.2.1
+  - ipympl=0.8.2
