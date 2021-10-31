@@ -1,0 +1,14 @@
+name: base
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9.5
+  - rasterio=1.2.10
+  - ca-certificates=2021.10.8
+  - certifi=2021.10.8
+  - openssl=1.1.1l
+  - geopandas=0.10.2
+  - jupyterlab=3.2.1
+  - ipympl=0.8.2
+  # - leafmap=0.5.3
