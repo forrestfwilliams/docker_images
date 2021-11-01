@@ -1,0 +1,11 @@
+# create environment : conda env create -f environment.yml
+# update dependencies: conda env update -f environment.yml
+# remove environment : conda env remove -n mintpy
+# enter  environment : conda activate mintpy
+# exit   environment : conda deactivate
+name: mintpy
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6

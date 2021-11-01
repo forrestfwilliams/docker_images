@@ -1,5 +1,6 @@
 # Use micromamba as the base image
-FROM mambaorg/micromamba:0.15.2
+# FROM mambaorg/micromamba:0.15.2
+FROM condaforge/mambaforge
 
 # Label image
 LABEL \
@@ -10,6 +11,8 @@ LABEL \
     "Email"="forrestfwilliams@icloud.com"
 
 # Clone MintPy and PyAPS repositories
+
+condaforge/mambaforge
 USER root
 RUN apt-get update && \
     apt-get install -y git && \
@@ -17,7 +20,8 @@ RUN apt-get update && \
     git clone https://github.com/insarlab/MintPy.git /home/micromamba/tools/MintPy && \
     git clone https://github.com/yunjunz/PyAPS.git /home/micromamba/tools/PyAPS
 
-# Set user and home directory
+# Create user and set work directory
+RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres.
 USER micromamba
 WORKDIR /home/micromamba
 

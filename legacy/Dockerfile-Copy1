@@ -1,0 +1,59 @@
+# Use mambaforge as the base image
+FROM condaforge/mambaforge
+
+# Label image
+LABEL \
+    "Description"="Container for open source time series InSAR processing with Mintpy" \
+    "Github Source"="https://github.com/insarlab/MintPy/" \
+    "Installation"="https://github.com/insarlab/MintPy/blob/main/docs/installation.md" \
+    "Dockerfile Author"="Forrest Williams" \
+    "Email"="forrestfwilliams@icloud.com"
+
+# Set user name
+ARG user=user
+
+# Create user, clone MintPy and PyAPS repositories
+RUN useradd -ms /bin/bash $user && \
+    git clone https://github.com/insarlab/MintPy.git /home/$user/tools/MintPy && \
+    git clone https://github.com/yunjunz/PyAPS.git /home/$user/tools/PyAPS && \
+    chown -R $user /home/$user/tools
+
+# Prepare environment for MintPy
+ARG MINTPY_HOME=/home/$user/tools/MintPy
+ARG PYAPS_HOME=/home/$user/tools/PyAPS
+ARG PYTHON3DIR=/opt/conda
+
+ENV MINTPY_HOME=${MINTPY_HOME}
+ENV PYAPS_HOME=${PYAPS_HOME}
+ENV PATH=${MINTPY_HOME}/mintpy:${PYTHON3DIR}/bin:${PATH}
+ENV PYTHONPATH=${MINTPY_HOME}:${PYAPS_HOME}
+
+# The environment becomes unresolvable if using a higher version of Python, so we set it to 3.6
+# RUN sed -i "s/  - python>=3.6,<3.9/  - python=3.6/g" ${MINTPY_HOME}/docs/environment.yml
+
+# # # Optionally add Jupyter Lab to environment file
+# # RUN echo "  - jupyterlab\n  - ipympl" >> ${MINTPY_HOME}/docs/environment.yml
+
+# Install dependencies
+# RUN mamba env update --name base --file ${MINTPY_HOME}/docs/environment.yml && \
+# RUN mamba env create --file ${MINTPY_HOME}/docs/environment.yml && \
+#     conda clean -afy
+
+RUN mamba env update --name base --file ${MINTPY_HOME}/docs/environment.yml python=3.6 && \
+    conda clean -afy
+
+# ADD mintpy.yml /tmp
+# RUN mamba env update --name base --file /tmp/mintpy.yml python=3.6 && \
+#     conda clean -afy
+
+# SHELL ["/bin/bash", "--login", "-c"]
+
+# # RUN mamba activate mintpy
+# # SHELL ["conda", "run", "-n", "mintpy", "/bin/bash", "-c"]
+
+# Create user and set work directory
+USER $user
+WORKDIR /home/$user
+
+# # Have the container start with a jupyter lab instance
+# CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0","--NotebookApp.token=mintpy"]
