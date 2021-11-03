@@ -1,7 +1,0 @@
-FROM mambaorg/micromamba:0.15.2
-USER micromamba
-WORKDIR /home/micromamba
-COPY --chown=micromamba:micromamba autorift.yml env.yaml
-RUN micromamba install -y -n base -f env.yaml && \
-    micromamba clean --all --yes
-CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0","--NotebookApp.token=micromamba"]
