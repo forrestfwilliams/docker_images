@@ -1,6 +1,7 @@
 name: base
 channels:
   - conda-forge
+  - fastai
   - defaults
 dependencies:
   - python=3.9.5
@@ -12,4 +13,5 @@ dependencies:
   - jupyterlab=3.2.1
   - ipympl=0.8.2
   - autorift=1.4.0
+  - opencv-python-headless
   # - leafmap=0.5.3

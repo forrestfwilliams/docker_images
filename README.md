@@ -2,17 +2,18 @@
 A repository for Forrest's data science docker images
 
 ## Build container
-`docker build --build-arg YML=jupyter.yml -t jupyter .`
+docker build --build-arg YML=jupyter.yml -t jupyter .
 
-## Run container
+## Container and machine-specific run commands
 Format: docker run (--rm) -p LOCAL_PORT:CONTAINER_PORT (8888) -v DATA_LOC:MOUNT_LOC --name CONTAINER_NAME IMAGE
 
-`docker run --rm -p 2002:8888 --name test_jupyter jupyter`
+These assume a specific directory structure so **don't assume they'll work on your computer**.
 
-`docker run --rm -p 2002:8888 -v /home/fw/data/test_data:/tmp/data --name test_gis gis`
+### Autorift:
+docker run -p 2001:8888 -v /home/fw/work/pixel/pixeloffset_mintpy:/home/micromamba/work forrestwilliams/autorift
 
 ## Remove all old components
-`docker system prune`
+docker system prune
 
 ## Export your conda environment
-`conda env export --from-history`
+conda env export --from-history
