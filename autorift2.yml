@@ -1,0 +1,8 @@
+name: base
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6
+  - autorift=1.4.0
+  # - leafmap=0.5.3
