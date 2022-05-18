@@ -11,4 +11,12 @@ dependencies:
   - geopandas=0.10.2
   - jupyterlab=3.2.1
   - ipympl=0.8.2
-  # - leafmap=0.5.3
+  - contextily
+  - rasterstats
+  - scikit-image
+  - scikit-learn
+  - richdem
+  - pysheds
+  - tqdm
+#  - leafmap
+#  - localtileserver

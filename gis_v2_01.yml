@@ -1,0 +1,21 @@
+name: base
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - rasterio
+  - richdem
+  - pysheds
+  - tqdm
+  - ca-certificates
+  - certifi
+  - openssl
+  - rasterstats
+  - scikit-image
+  - scikit-learn
+  - geopandas
+  - jupyterlab
+  - ipympl
+  - openpyxl
+  - pytest

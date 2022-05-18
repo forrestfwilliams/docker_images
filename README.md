@@ -17,3 +17,6 @@ docker system prune
 
 ## Export your conda environment
 conda env export --from-history
+
+
+docker build --build-arg YML=gis.yml -t forrestwilliams/gis:1.04 .

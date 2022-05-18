@@ -1,17 +1,15 @@
 # Pull micromamba image
-FROM mambaorg/micromamba:0.15.2
+FROM mambaorg/micromamba
 
-# Set micromamba as user (comes with base image)
-USER micromamba
-WORKDIR /home/micromamba
+# Set Working Directory
+WORKDIR /home/$MAMBA_USER
 
 # Specify conda-style yml file
 ARG YML
-COPY --chown=micromamba:micromamba $YML env.yaml
+COPY --chown=$MAMBA_USER:$MAMBA_USER $YML /tmp/env.yaml
 
 # Install packages
-RUN micromamba install -y -n base -f env.yaml && \
+RUN micromamba install -y -n base -f /tmp/env.yaml && \
     micromamba clean --all --yes
 
-# Start with a Jupyter Lab instance
-CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0","--NotebookApp.token=micromamba"]
+ENTRYPOINT ["/usr/local/bin/_entrypoint.sh"]
